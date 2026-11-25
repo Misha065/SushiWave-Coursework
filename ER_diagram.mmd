@@ -1,0 +1,40 @@
+erDiagram
+    CATEGORIES ||--o{ PRODUCTS : contains
+    PRODUCTS ||--o{ ORDER_ITEMS : ordered_as
+    ORDERS ||--|{ ORDER_ITEMS : contains
+    ORDER_ITEMS ||--o{ ITEM_MODIFIERS : chooses
+    ORDERS ||--|{ STATUS_HISTORY : records
+    CATEGORIES { int id PK
+                 string name }
+    PRODUCTS { int id PK
+               int category_id FK
+               string name
+               int price
+               int available }
+    MODIFIERS { int id PK
+                string name
+                int price }
+    ORDERS { int id PK
+             string tracking_token
+             string customer_name
+             string phone
+             datetime pickup_at
+             int total
+             string status }
+    ORDER_ITEMS { int id PK
+                  int order_id FK
+                  int product_id FK
+                  string product_name
+                  int quantity
+                  int unit_price }
+    ITEM_MODIFIERS { int id PK
+                     int order_item_id FK
+                     string modifier_name
+                     int price }
+    STATUS_HISTORY { int id PK
+                     int order_id FK
+                     string status
+                     datetime changed_at }
+    OPERATORS { int id PK
+                string username
+                string password_hash }
